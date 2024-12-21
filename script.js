@@ -69,3 +69,16 @@ const albumlist = document.getElementById('album-list')
 
 // array for Albums
 let album = [];
+
+
+// fetch function for Album data
+async function fetchAlbumData() {
+    try{
+        const response = await fetch('https://jsonplaceholder.typicode.com/albums');
+        const albumData = await response.json();
+        albums = albumData.slice(0, 10);
+        renderAlbums();
+    } catch(error) {
+        console.error("error fetching album data:", error);
+    }
+}
