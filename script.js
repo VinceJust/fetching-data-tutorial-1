@@ -63,3 +63,9 @@ function renderImages(){
 }
 
 // showUsers();
+
+// DOM elements for Album List
+const albumlist = document.getElementById('album-list')
+
+// array for Albums
+let album = [];
