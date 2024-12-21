@@ -5,11 +5,11 @@ const imageList = document.getElementById('image-list');
 
 
 // Define an array for users
-let users = []; 
+let users = [];
 let images = []; // to be filled with images from api endpoint https://jsonplaceholder.typicode.com/photos
 
 // define async function to fetch users data
-async function fetchUserData(){
+async function fetchUserData() {
     try {
         const response = await fetch('https://jsonplaceholder.typicode.com/users');
         // console.log(typeof(response);
@@ -18,7 +18,7 @@ async function fetchUserData(){
         users = usersData;
         console.log(users);
         renderUsers();
-        
+
     } catch (error) {
         console.log("Wir bekommen beim Aufruf der Users-APi den folgenden Fehler", error);
     }
@@ -36,13 +36,13 @@ async function fetchImageData() {
     } catch (error) {
         console.log("Wir bekommen beim Fetching der Image API folgenden Fehler: ", error)
     }
-    
+
 }
 
 fetchUserData();
 fetchImageData();
 
-function renderUsers(){
+function renderUsers() {
     users.forEach((user) => {
         const userItem = document.createElement('li');
         userItem.innerHTML = user.name;
@@ -52,7 +52,7 @@ function renderUsers(){
     });
 }
 
-function renderImages(){
+function renderImages() {
     images.forEach((image) => {
         const imageItem = document.createElement('img');
         console.log(imageItem);
@@ -65,20 +65,32 @@ function renderImages(){
 // showUsers();
 
 // DOM elements for Album List
-const albumlist = document.getElementById('album-list')
+const albumList = document.getElementById('album-list')
 
 // array for Albums
-let album = [];
+let albums = [];
 
 
 // fetch function for Album data
 async function fetchAlbumData() {
-    try{
+    try {
         const response = await fetch('https://jsonplaceholder.typicode.com/albums');
         const albumData = await response.json();
         albums = albumData.slice(0, 10);
         renderAlbums();
-    } catch(error) {
-        console.error("error fetching album data:", error);
+    } catch (error) {
+        console.error("Error fetching album data:", error);
     }
 }
+
+// rendering function for Albums
+function renderAlbums() {
+    albums.forEach((album) => {
+        const albumItem = document.createElement('li');
+        albumItem.textContent = album.title;
+        albumList.appendChild(albumItem);
+    });
+}
+
+// fetch data when loading the site
+fetchAlbumData();
